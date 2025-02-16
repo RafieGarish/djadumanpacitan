@@ -1,19 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Hamburger Menu Implementation
+    // Hamburger Menu Functionality
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
 
     if (hamburger && navLinks) {
+        // Toggle mobile menu
         hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
             hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
         });
 
+        // Close menu when clicking links
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
                 hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
             });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
         });
     }
 
@@ -28,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sr.reveal('.process-step', { origin: 'bottom', interval: 200 });
     sr.reveal('.product-card', { origin: 'bottom', interval: 200 });
 
-    // Paper Hover Effect
+    // Section Hover Effect
     document.querySelectorAll('.section').forEach(section => {
         section.addEventListener('mousemove', function(e) {
             const x = e.clientX / window.innerWidth;
@@ -46,35 +56,34 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
         });
     });
 });
 
-// Window-scoped events
+// Window Event Listeners
 window.addEventListener('scroll', () => {
     const nav = document.querySelector('.nav');
     const storySection = document.getElementById('story');
-    
+    const header = document.querySelector('.header');
+
+    // Navbar Scroll Effects
     if (nav && storySection) {
         const storyOffset = storySection.offsetTop - 100;
-        
-        if (window.pageYOffset > storyOffset) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
+        nav.classList.toggle('scrolled', window.pageYOffset > storyOffset);
     }
-    
-    // Parallax effect
-    const header = document.querySelector('.header');
+
+    // Parallax Effect
     if (header) {
         header.style.backgroundPositionY = -(window.pageYOffset * 0.5) + 'px';
     }
 
-    // Close menu on scroll
+    // Close mobile menu on scroll
     const activeMenu = document.querySelector('.nav-links.active');
     const hamburger = document.querySelector('.hamburger');
     if (activeMenu && hamburger) {
@@ -86,13 +95,12 @@ window.addEventListener('scroll', () => {
 // Coffee Bean Animation
 function createCoffeeBean() {
     const bean = document.createElement('img');
-    bean.src = 'assets/img/coffee_bean.png'; // Path to your image
+    bean.src = 'assets/img/coffee_bean.png';
     bean.alt = 'Coffee bean';
     bean.style.position = 'fixed';
-    bean.style.width = '25px'; // Adjust size as needed
-    // bean.style.height = '25px';
+    bean.style.width = '25px';
     bean.style.left = Math.random() * 100 + 'vw';
-    bean.style.animation = 'fall ' + (Math.random() * 3 + 2) + 's linear';
+    bean.style.animation = `fall ${Math.random() * 3 + 2}s linear`;
     // bean.style.zIndex = '9999';
     bean.style.zIndex = '10';
     bean.style.pointerEvents = 'none';
@@ -101,7 +109,7 @@ function createCoffeeBean() {
     setTimeout(() => bean.remove(), 5000);
 }
 
-// Add animation keyframes dynamically
+// Add animation keyframes
 const style = document.createElement('style');
 style.textContent = `
 @keyframes fall {
