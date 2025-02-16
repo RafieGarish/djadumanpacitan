@@ -1,0 +1,537 @@
+:root {
+    --primary-color: #4B3621;
+    --secondary-color: #654321;
+    --accent-color: #8B5E3C;
+    --bg-color: #FFF5E6;
+    --text-color: #3E2723;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Old Standard TT', serif;
+    background: url('https://www.transparenttextures.com/patterns/old-paper.png');
+    color: var(--text-color);
+    line-height: 1.8;
+}
+
+/* Torn Paper Effects */
+.section {
+    position: relative;
+    padding: 80px 20px;
+    margin: 60px 20px;
+    background: var(--bg-color);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.section::before,
+.section::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background-image: url('https://www.transparenttextures.com/patterns/torn-edge.png');
+    background-size: cover;
+    z-index: 1;
+}
+
+.section::before {
+    top: -30px;
+    transform: rotate(180deg);
+}
+
+.section::after {
+    bottom: -30px;
+}
+
+.header {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/img/header.JPG');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.nav {
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    /* Initial transparent state */
+    background: transparent;
+    backdrop-filter: none;
+    border-bottom: 1px solid transparent;
+}
+
+.nav.scrolled {
+    /* Glassmorphic effect */
+    background: rgba(255, 255, 255, 0.511);
+    backdrop-filter: blur(10px) saturate(180%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.nav.scrolled .nav-links a {
+    color: var(--primary-color);
+}
+
+.nav.scrolled .nav-links a:hover {
+    color: var(--secondary-color);
+}
+
+.logo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    /* max-width: 40px;
+    height: 40px; */
+}
+
+.logo img {
+    height: 40px;
+    position: absolute;
+    transition: all 0.4s ease-in-out;
+}
+
+.logo-default {
+    opacity: 1;
+    visibility: visible;
+}
+
+.logo-scrolled {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.nav.scrolled .logo-default {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.nav.scrolled .logo-scrolled {
+    opacity: 1;
+    visibility: visible;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: var(--bg-color);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+    position: relative;
+    width: 30px;
+    height: 25px;
+}
+
+.hamburger span {
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: var(--bg-color);
+    border-radius: 2px;
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 10px; }
+.hamburger span:nth-child(3) { top: 20px; }
+
+.nav.scrolled .hamburger span {
+    background: var(--primary-color);
+}
+
+img[alt="Coffee bean"] {
+    /* filter: sepia(100%) brightness(90%); */
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+.hero h1 {
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 4rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Story Timeline */
+.story-timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+.timeline-item {
+    padding: 20px 40px;
+    margin: 50px 0;
+    border-left: 3px solid var(--primary-color);
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    border: 3px solid var(--primary-color);
+}
+
+/* Production Process */
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    padding: 40px 0;
+}
+
+.process-step {
+    text-align: center;
+    padding: 20px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 5px;
+    position: relative;
+}
+
+.process-step i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+/* Products Grid */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    padding: 40px 20px;
+}
+
+.product-card {
+    background: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.product-card img {
+    width: 40%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 12px 35px;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 0;
+    border: 2px solid var(--secondary-color);
+    font-family: 'Cinzel Decorative', cursive;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+/* Modify the view more button styles */
+#products {
+    position: relative;
+    padding-bottom: 100px; /* Add space for the button */
+}
+
+.view-more-container {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    text-align: right;
+}
+
+.btn-view-more {
+    padding: 12px 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary-color);
+    border: 2px solid var(--secondary-color);
+    transition: all 0.3s ease;
+}
+
+.btn-view-more:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.btn-view-more i {
+    font-size: 0.9em;
+    transition: transform 0.3s ease;
+}
+
+.btn-view-more:hover i {
+    transform: translateX(4px);
+}
+
+/* Remove previous loading animation styles */
+
+/* Footer Styles */
+.footer {
+    background: url('https://www.transparenttextures.com/patterns/old-paper.png');
+    position: relative;
+    padding: 80px 20px 30px;
+    margin-top: 100px;
+    border-top: 2px solid var(--primary-color);
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background-image: url('https://www.transparenttextures.com/patterns/torn-edge.png');
+    background-size: cover;
+    transform: rotate(180deg);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section h4 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    border-bottom: 2px dashed var(--accent-color);
+    padding-bottom: 10px;
+}
+
+.footer-links li {
+    margin: 10px 0;
+}
+
+.footer-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+    margin-left: 5px;
+}
+
+.footer-links i {
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.social-links a {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    transition: transform 0.3s;
+}
+
+.social-links a:hover {
+    transform: translateY(-3px);
+}
+
+.newsletter input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background: rgba(255,255,255,0.8);
+    border: 1px solid var(--primary-color);
+    font-family: 'Old Standard TT', serif;
+}
+
+.btn-newsletter {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.footer-bottom p {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+.footer-divider {
+    width: 100px;
+    opacity: 0.7;
+    margin: 20px 0;
+    filter: sepia(100%);
+}
+
+@media (max-width: 768px) {
+    /* .hamburger {
+        display: block;
+        order: 2;
+    } */
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 70%;
+        max-width: 300px;
+        background: var(--bg-color);
+        flex-direction: column;
+        padding: 80px 20px;
+        transition: right 0.3s ease-in-out;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        color: var(--text-color) !important;
+        padding: 15px 0;
+        font-size: 1.2rem;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+    }
+    
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(8px, -8px);
+    }
+
+    .nav {
+        padding: 15px 20px !important;
+        justify-content: space-between;
+    }
+
+    .logo {
+        max-width: 150px;
+        height: auto;
+    }
+
+    .logo img {
+        height: 35px !important;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .process-steps {
+        grid-template-columns: 1fr;
+    }
+
+    #products {
+        padding-bottom: 80px;
+    }
+    
+    .view-more-container {
+        position: static;
+        text-align: center;
+        margin-top: 30px;
+    }
+    
+    .btn-view-more {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-section {
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .footer-links a:hover {
+        margin-left: 0;
+    }
+}
